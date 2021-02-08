@@ -1,0 +1,118 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define pb push_back
+#define f(i,x,n) for(ll i=x;i<n;i++)
+#define ff first
+#define ss second
+#define mod 1000000007
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+#define msd ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define mod 1000000007
+#define maxn 1000000
+
+bool prime[maxn+1];
+ll fac[maxn+1];
+
+ll phi(ll n)
+{
+    ll res=n;
+    for(ll i=2;i*i<=n;i++)
+    {
+        if(n%i==0)
+        {
+            res/=i;
+            res *= (i-1);
+            
+            while(n%i==0)
+            n/=i;
+        }
+    }
+    
+    if(n>1)
+    {
+        res/=n;
+        res*=(n-1);
+    }
+    
+    return res;
+}
+ll power(ll a , ll n , ll p)
+{
+    ll res=1;
+    a=a%p;
+    while(n)
+    {
+        if(n%2)
+        {
+            res = (res*a)%p;
+            n--;
+        }
+        else
+        {
+            a = (a*a)%p;
+            n/=2;
+        }
+    }
+    return res%p;
+}
+
+ll gcd(ll a , ll b)
+{
+    if(b==0)
+        return a;
+
+    return gcd(b,a%b);
+}
+
+
+ll ncr(ll n , ll k , ll p)
+{
+    if(k>n)
+    return 0;
+    
+    if(k==0 || k==n)
+    return 1;
+    
+    if(k==1 || k==n-1)
+    return n;
+
+    ll res=fac[n];
+    res = (res * power(fac[k] , p-2 , p)) % p;
+    res = (res * power(fac[n-k] , p-2 , p)) % p;
+
+    return res%p;
+}
+
+int main()
+{
+    for(ll i=0;i<=maxn;i++)
+    prime[i]=true;
+
+    prime[0]=prime[1]=false;
+
+    for(ll p=2;p*p<=maxn;p++)
+    {
+        if(prime[p])
+        {
+            for(ll i=p*p;i<=maxn;i+=p)
+                prime[i]=false;
+        }
+    }
+    
+
+    fac[0]=fac[1]=1;
+    for(ll i=2;i<=maxn;i++)
+    fac[i] = (fac[i-1]*i)%mod;
+    
+    ll t=1;
+
+    while(t--)
+    {
+        
+    }
+    
+    return 0;
+}
